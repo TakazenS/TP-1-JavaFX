@@ -3,12 +3,14 @@ package com.example.projet1javafx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import java.io.IOException;
 
 public class Fenetre1Controller
 {
@@ -19,6 +21,14 @@ public class Fenetre1Controller
     @FXML private Button btnValider;
     @FXML private Label dynamicLbl;
 
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     // Change le texte du label lorsque le bouton Ok est cliqué
     @FXML private void evtOnMouseClickedBtnOk()
     {
@@ -28,7 +38,7 @@ public class Fenetre1Controller
     // Charge la deuxième fenêtre avec la valeur du txf de la première
     // et attend la validation sur la deuxième fenêtre pour renvoyer la
     // valeur du txf
-    @FXML private void evtOnMouseClickedBtnValider() throws Exception
+    @FXML private void evtOnMouseClickedBtnValider()
     {
         try {
             // Chargement de la deuxième fenêtre et de ses paramètres
@@ -53,8 +63,9 @@ public class Fenetre1Controller
                 txfText.setText(controller.getTxfText());
                 dynamicLbl.setText(txfText.getText());
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
+            showError(e.getMessage());
         }
     }
 
