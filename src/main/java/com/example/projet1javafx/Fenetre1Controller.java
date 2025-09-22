@@ -21,7 +21,8 @@ public class Fenetre1Controller
     @FXML private Button btnValider;
     @FXML private Label dynamicLbl;
 
-    private void showError(String message) {
+    private void showError(String message)
+    {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
@@ -40,7 +41,8 @@ public class Fenetre1Controller
     // valeur du txf
     @FXML private void evtOnMouseClickedBtnValider()
     {
-        try {
+        try
+        {
             // Chargement de la deuxième fenêtre et de ses paramètres
             FXMLLoader fxmlLoader = new FXMLLoader(Tp1.class.getResource("fenetre2.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 400, 400);
@@ -59,11 +61,14 @@ public class Fenetre1Controller
             // Attend la fermeture de la deuxième fenêtre puis envoi des valeur du txf
             // de la deuxième fenêtre vers la première
             stage.showAndWait();
-            if (controller.getIsBtnValiderClicked()) {
+            if (controller.getIsBtnValiderClicked())
+            {
                 txfText.setText(controller.getTxfText());
                 dynamicLbl.setText(txfText.getText());
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             showError(e.getMessage());
         }
